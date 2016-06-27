@@ -1,15 +1,21 @@
 package muyintech.myguice.service;
 
+import com.google.inject.Inject;
 import muyintech.myguice.model.Customer;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
-
 public class CustomerDaoImpl implements CustomerDao {
+
+  private final CustomerDb customerDb;
+
+  @Inject
+  public CustomerDaoImpl(CustomerDb customerDb) {
+    this.customerDb = customerDb;
+  }
 
   @Override
   public List<Customer> findAll() {
-    return asList(new Customer("DHA"));
+    return customerDb.selectCustomers();
   }
 }
